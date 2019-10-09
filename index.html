@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Saapuvien bussien pysäkkinäyttö</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  
+  <body onLoad="initData()">
+ 
+
+    <h2>
+      Saapuvat bussit pysäkillä
+      <a id="pysäkki">--</a>
+    </h2>
+    <form>
+        <div class="form-group">
+          <label for="Pysäkki">Pysäkin numero</label>
+          <input id="vaihdapysakkiin" placeholder="Syötä pysäkin numero">
+          <small id="pysäkkiHelp" class="form-text text-muted">Kirjoita haluamasi bussipysäkin numero ja paina Vaihda.</small>
+
+          <select id="locality-dropdown" name="locality"></select>
+        </div>
+        <button onClick="vaihdaPysäkki()" type="button" class="btn btn-primary">Vaihda</button>
+      </form>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Bussilinja</th>
+              <th>Määränpää</th>
+              <th>Saapumisaika</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <a id="linja0">--</a>
+              </td>
+              <td>
+                <a id="kohde0">--</a>
+              </td>
+              <td>
+                <a id="aika0">--</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                 <a id="linja1">--</a>
+               </td>
+               <td>
+                 <a id="kohde1">--</a>
+               </td>
+               <td>
+                 <a id="aika1">--</a>
+               </td>
+            </tr>
+            <tr>
+              <td>
+                  <a id="linja2">--</a>
+                </td>
+                <td>
+                  <a id="kohde2">--</a>
+                </td>
+                <td>
+                  <a id="aika2">--</a>
+                </td>
+            </tr>
+            <tr>
+              <td>
+                  <a id="linja3">--</a>
+                </td>
+                <td>
+                  <a id="kohde3">--</a>
+                </td>
+                <td>
+                  <a id="aika3">--</a>
+                </td>
+            </tr>
+            <tr>
+              <td>
+                  <a id="linja4">--</a>
+                </td>
+                <td>
+                  <a id="kohde4">--</a>
+                </td>
+                <td>
+                  <a id="aika4">--</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
