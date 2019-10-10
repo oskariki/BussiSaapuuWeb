@@ -18,6 +18,42 @@ function vaihdaPysäkki() {
   //updateBusDataAsync();
 }
 
+async function haePysäkinNimi(id) {
+  const url = 'http://data.foli.fi/gtfs/v0/20191008-105302/stops';
+  const request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.onload = function() {
+    if (request.status === 200) {
+      const data = JSON.parse(request.responseText);
+      pysäkkinimihaettu = Object(data[id].stop_name);
+      
+      console.log("Haettu pysäkin nimi: " + pysäkkinimihaettu);
+      
+      /*
+      for (let i = 0; i < 5; i++) {
+        option = document.createElement('option');
+        option.text = data[i].stop_name;
+        option.value = data[i].stop_id;
+        dropdown.add(option);
+        console.log("pysäkit lisätty listaan");
+      }
+      */
+      
+    } else {
+      console.log("Serveri saavutettu, mutta palauttaa errorin")
+     // Reached the server, but it returned an error
+    }   
+  }
+
+  request.onerror = function() {
+    console.error('An error occurred fetching the JSON from ' + url);
+  };
+
+  request.send();
+
+}
+
+/*
 async function haePysäkitListaanAsync() {
   console.log("aloitetaan pysäkkien haku");
   let dropdown = document.getElementById('locality-dropdown');
@@ -49,13 +85,21 @@ async function haePysäkitListaanAsync() {
       //const data = request.responseText;
       let option;
       console.log(data);
-      //console.log("pysäkkien lkm" + data.stops.length);
+      let pysäkkienLkm = Object.keys(data).length;
+      console.log("pysäkkien lkm" + pysäkkienLkm);
       console.log("pysäkin 1 nimi: " + Object(data[1].stop_name));
-      console.log("pysäkin 0 id numero: " + Object(data[1].stop_code));
+      console.log("pysäkin 1 id numero: " + Object(data[1].stop_code));
       //console.log("testi: " + Object.keys(data));
+      let pysäkki_nimi=[];
+      let pysäkki_id=[];
+
+      for (let i = 1; i < Object.keys(data).length; i++) {
+        pysäkki_nimi[i] = Object(data[i].stop_name);
+        pysäkki_id[i] = Object(data[i].stop_name);
+      }
 
 
-      /*
+      
       for (let i = 0; i < 5; i++) {
         option = document.createElement('option');
         option.text = data[i].stop_name;
@@ -63,7 +107,7 @@ async function haePysäkitListaanAsync() {
         dropdown.add(option);
         console.log("pysäkit lisätty listaan");
       }
-      */
+      
       
     } else {
       console.log("Serveri saavutettu, mutta palauttaa errorin")
@@ -78,14 +122,22 @@ async function haePysäkitListaanAsync() {
   request.send();
   
 }
-
+*/
 
 var pysäkki = '100';
+var pysäkkinimi = 'testi';
 var hostname = 'http://data.foli.fi';
 var path = '/siri/sm/';
+var pysäkkinimihaettu;
+let result;
 
 async function updateBusDataAsync() {
     console.log("Tämänhetkinen pysäkki: " + pysäkki);
+    
+
+    haePysäkinNimi(pysäkki);
+    console.log(pysäkkinimihaettu);
+    //console.log("result" + result);
     
 
     //alla parametrit yhteyden muodostamiseen fölin palvelimelle (haetaan tiedot pysäkiltä numero 100) /format :ajan formatointi
@@ -156,9 +208,12 @@ async function updateBusDataAsync() {
     //var kohde = myJson.result[0].destinationdisplay;
     //var aika = Math.round((myJson.result[0].expectedarrivaltime - now) / 60);
 
-    var tags = ["pysäkki", "linja0", "kohde0", "aika0", "linja1", "kohde1", "aika1", "linja2", "kohde2", "aika2",
+    
+    console.log("Pysäkin nimi on " + pysäkkinimi);
+
+    var tags = ["pysäkki", "pysäkkinimi","linja0", "kohde0", "aika0", "linja1", "kohde1", "aika1", "linja2", "kohde2", "aika2",
                 "linja3", "kohde3", "aika3", "linja4", "kohde4", "aika4"],
-        corr = [pysäkki, linja[0], kohde[0], aika[0], linja[1], kohde[1], aika[1], linja[2], kohde[2], aika[2],
+        corr = [pysäkki, pysäkkinimihaettu, linja[0], kohde[0], aika[0], linja[1], kohde[1], aika[1], linja[2], kohde[2], aika[2],
                 linja[3], kohde[3], aika[3], linja[4], kohde[4], aika[4]];
 
     for (var i = 0; i < tags.length; i++) {
@@ -170,9 +225,11 @@ async function updateBusDataAsync() {
 
 
 function initData() {
-  haePysäkitListaanAsync();
-  updateBusDataAsync(pysäkki);
-  window.setInterval("updateBusDataAsync()", 1000);
+  //haePysäkitListaanAsync();
+
+  updateBusDataAsync();
+  
+  window.setInterval("updateBusDataAsync()", 10000);
   //var pysäkki = document.getElementById("vaihdapysakkiin").value;
 }
 

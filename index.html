@@ -14,18 +14,17 @@
  
 
     <h2>
-      Saapuvat bussit pysäkillä
-      <a id="pysäkki">--</a>
+      Saapuvat bussit: Pysäkki
+      <a id="pysäkki">--</a>, 
+      <a id="pysäkkinimi">--</a>
     </h2>
     <form>
         <div class="form-group">
           <label for="Pysäkki">Pysäkin numero</label>
-          <input id="vaihdapysakkiin" placeholder="Syötä pysäkin numero">
+          <input id="vaihdapysakkiin" >
+          <button onClick="vaihdaPysäkki()" type="button" class="btn btn-primary">Vaihda</button>
           <small id="pysäkkiHelp" class="form-text text-muted">Kirjoita haluamasi bussipysäkin numero ja paina Vaihda.</small>
-
-          <select id="locality-dropdown" name="locality"></select>
         </div>
-        <button onClick="vaihdaPysäkki()" type="button" class="btn btn-primary">Vaihda</button>
       </form>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
