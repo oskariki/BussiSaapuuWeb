@@ -8,16 +8,26 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+    <link href="style.css" rel="stylesheet">
   </head>
   
   <body onLoad="initData()">
- 
 
-    <h2>
-      Saapuvat bussit: Pysäkki
-      <a id="pysäkki">--</a>, 
-      <a id="pysäkkinimi">--</a>
-    </h2>
+      <div class="container">
+        <img src="kuvat/pysäkki.svg" alt="Snow" style="width:100%;">
+          <img src="kuvat/alaosa.svg" alt="Snow" style="width:100%;">
+          <div class="bottom-left">
+              <a id="pysäkki">--</a>
+          </div>
+          <div class="top-left"></div>
+          <div class="top-right"></div>
+          <div class="bottom-right">
+              <a id="pysäkkinimi">--</a>
+          </div>
+          <div class="centered"></div>
+      </div> 
+
     <form>
         <div class="form-group">
           <label for="Pysäkki">Pysäkin numero</label>

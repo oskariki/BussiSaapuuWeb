@@ -1,11 +1,50 @@
-body {background-color:#666;}
+body {background-color:#fff;}
 
-#pysäkkinäyttö {
-  font: small-caps lighter 43px/150% "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-  text-align:left;
-  width: 50%;
-  margin: 40px auto;
-  color:#fff;
-  border-left: 3px solid yellow;
-  padding: 20px;
+ /* Container holding the image and the text */
+ .container {
+  position: relative;
+  text-align: center;
+  color: black;
 }
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  font-size: 30px;
+  font-size: 8vmin;
+  font-weight: bold;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 30px;
+  font-size: 8vmin;
+  font-weight: bold;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} 
