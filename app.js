@@ -130,6 +130,10 @@ var hostname = 'http://data.foli.fi';
 var path = '/siri/sm/';
 var pysäkkinimihaettu;
 let result;
+// Get the input field
+var input = document.getElementById("vaihdapysäkkiin");
+
+
 
 async function updateBusDataAsync() {
     console.log("Tämänhetkinen pysäkki: " + pysäkki);
@@ -231,5 +235,6 @@ function initData() {
   
   window.setInterval("updateBusDataAsync()", 10000);
   //var pysäkki = document.getElementById("vaihdapysakkiin").value;
+  
 }
 

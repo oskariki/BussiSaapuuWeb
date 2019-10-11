@@ -13,12 +13,13 @@
   </head>
   
   <body onLoad="initData()">
+    <div class="container">
 
       <div class="container">
-        <img src="kuvat/pysäkki.svg" alt="Snow" style="width:100%;">
-          <img src="kuvat/alaosa.svg" alt="Snow" style="width:100%;">
+        <img src="kuvat/pysäkki.svg" style="width:100%;">
+          <img src="kuvat/alaosa.svg" style="width:100%;">
           <div class="bottom-left">
-              <a id="pysäkki">--</a>
+              <a id="pysäkki">--</a>              
           </div>
           <div class="top-left"></div>
           <div class="top-right"></div>
@@ -26,16 +27,8 @@
               <a id="pysäkkinimi">--</a>
           </div>
           <div class="centered"></div>
-      </div> 
-
-    <form>
-        <div class="form-group">
-          <label for="Pysäkki">Pysäkin numero</label>
-          <input id="vaihdapysakkiin" >
-          <button onClick="vaihdaPysäkki()" type="button" class="btn btn-primary">Vaihda</button>
-          <small id="pysäkkiHelp" class="form-text text-muted">Kirjoita haluamasi bussipysäkin numero ja paina Vaihda.</small>
-        </div>
-      </form>
+      </div>
+      
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -104,6 +97,15 @@
           </tbody>
         </table>
       </div>
+      <form>
+          <div class="form-group">
+            <label for="Pysäkki">Pysäkin numero</label>
+            <input id="vaihdapysakkiin" >
+            <button id ="vaihtonappi" onClick="vaihdaPysäkki()" type="button" class="btn btn-primary">Vaihda</button>
+            <small id="pysäkkiHelp" class="form-text text-muted">Kirjoita haluamasi bussipysäkin numero ja paina Vaihda.</small>
+          </div>
+        </form> 
+    </div>
       
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

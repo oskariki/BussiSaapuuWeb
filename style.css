@@ -5,6 +5,8 @@ body {background-color:#fff;}
   position: relative;
   text-align: center;
   color: black;
+  
+  max-width: 600px;
 }
 
 /* Bottom left text */
@@ -12,8 +14,8 @@ body {background-color:#fff;}
   position: absolute;
   bottom: 8px;
   left: 16px;
-  font-size: 30px;
-  font-size: 8vmin;
+  font-size: 40px;
+  font-size: 10.5vmin;
   font-weight: bold;
 }
 
@@ -37,7 +39,7 @@ body {background-color:#fff;}
   bottom: 8px;
   right: 16px;
   font-size: 30px;
-  font-size: 8vmin;
+  font-size: 5vmin;
   font-weight: bold;
 }
 
