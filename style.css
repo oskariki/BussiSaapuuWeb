@@ -15,7 +15,7 @@ body {background-color:#fff;}
   bottom: 8px;
   left: 16px;
   font-size: 40px;
-  font-size: 10.5vmin;
+  
   font-weight: bold;
 }
 
@@ -38,8 +38,7 @@ body {background-color:#fff;}
   position: absolute;
   bottom: 8px;
   right: 16px;
-  font-size: 30px;
-  font-size: 5vmin;
+  font-size: 20px;
   font-weight: bold;
 }
 
