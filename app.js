@@ -91,10 +91,17 @@ async function updateBusDataAsync() {
       linja[0] = 'Lähtöjä ei ole saatavilla.';
     }
 
+    //Käydään läpi JSON-datassa olevat lähdöt ja tallennetaan taulukoihin linja[], kohde[] ja aika[]
     for (var j = 0; j < saapuvienlkm; j++) {
+      //Tarkastus: jos arvioitu lähtöaika on menneisyydessä, siirrytään seuraavaan lähtöön (föli bugi/vanhentunut tieto).
+      if (myJson.result[j].expecteddeparturetime < now) {
+        j++;
+      }
       linja[j] = myJson.result[j].lineref;
       kohde[j] = myJson.result[j].destinationdisplay;
-      aika[j] = Math.round((myJson.result[j].expectedarrivaltime - now) / 60);
+      
+      //Lasketaan kuinka monta minuuttia on arvioituun lähtöaikaan
+      aika[j] = Math.round((myJson.result[j].expecteddeparturetime - now) / 60);
       aika[j].toString();
       aika[j] = aika[j] + " min"
     }
