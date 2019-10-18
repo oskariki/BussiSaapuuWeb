@@ -2,6 +2,20 @@
 ** http://data.foli.fi/siri/sm/"pysäkintunniste" - Pysäkkikohtainen ennuste pysäkistä "pysäkintunniste"
 */
 
+// Alla parametrit yhteyden muodostamiseen fölin palvelimille
+var pysäkki = '100'; // Oletuksena haetaan tiedot pysäkiltä numero 100
+var hostname = 'http://data.foli.fi';
+var pathStops = '/siri/sm/';
+var pathStopnames = '/gtfs/stops';
+
+var pysäkkiävaihdettu = true; // Onko käyttäjä vaihtanut pysäkkiä, jolloin pysäkin nimi pitää selvittää.
+var entinenpysäkki = pysäkki;
+var pysäkkinimihaettu;
+let result;
+
+// Tekstikenttä, johon syötetään halutun pysäkin tunniste
+var input = document.getElementById("vaihdapysäkkiin");
+
 // Funktio pysäkin vaihtamiseksi
 function vaihdaPysäkki() {
   window.clearInterval(); // Pysäyttää sivun automaattisen päivittämisen
@@ -11,19 +25,18 @@ function vaihdaPysäkki() {
 }
 
 // Asynkroninen funktio, joka selvittää pysäkin nimen sen ID-tunnisteen perusteella
-async function haePysäkinNimi(id) {
-  // const url = 'http://data.foli.fi/gtfs/stops';
-  
+async function haePysäkinNimiAsync(id) {
+
   // URL-osoitteen muodostaminen
-  var url = hostname + path_stopnames;
-  
+  var url = hostname + pathStopnames;
+
   const request = new XMLHttpRequest();
   request.open('GET', url, true);
   request.onload = function() {
     if (request.status === 200) {
-      const data = JSON.parse(request.responseText);
+      const response = JSON.parse(request.responseText);
       try {
-        pysäkkinimihaettu = Object(data[id].stop_name);
+        pysäkkinimihaettu = Object(response[id].stop_name);
         console.log('Pysäkin nimi löytyi: ' + pysäkkinimihaettu);
         entinenpysäkki = pysäkki;
       } catch {
@@ -42,20 +55,7 @@ async function haePysäkinNimi(id) {
   };
 
   request.send();
-
 }
-
-// Alla parametrit yhteyden muodostamiseen fölin palvelimelle (oletuksena haetaan tiedot pysäkiltä numero 100)
-var pysäkki = '100';
-var pysäkkinimi = 'testi';
-var hostname = 'http://data.foli.fi';
-var path_stops = '/siri/sm/';
-var path_stopnames = '/gtfs/stops';
-
-var pysäkkiävaihdettu = true; // Onko käyttäjä vaihtanut pysäkkiä, jolloin pysäkin nimi pitää selvittää.
-var entinenpysäkki = pysäkki;
-var pysäkkinimihaettu;
-let result;
 
 // Tapahtumankäsittelijä Enter-napille: Tarvitaan, jottei koko sivua ladata uudelleen, kun Enteriä painetaan.
 let tekstikenttä_vaihdapysäkkiin = document.getElementById('vaihdapysakkiin');
@@ -67,29 +67,25 @@ tekstikenttä_vaihdapysäkkiin.addEventListener('keydown', function(event) {
   }
 });
 
-// Tekstikenttä, johon syötetään halutun pysäkin tunniste
-var input = document.getElementById("vaihdapysäkkiin");
-
 // Asynkroninen funktio, joka hakee fölin palvelimelta tiedot seuraavaksi saapuvista busseista
 async function updateBusDataAsync() {
   console.log('Päivitetään pysäkin ' + pysäkki + ' tiedot.');
   
   if (pysäkkiävaihdettu) {
-    haePysäkinNimi(pysäkki);
+    haePysäkinNimiAsync(pysäkki);
     pysäkkiävaihdettu = false;
   }
 
   // URL-osoitteen muodostaminen
-  var url = hostname + path_stops + pysäkki;
+  var url = hostname + pathStops + pysäkki;
 
   let response = await fetch(url);
   let myJson = await response.json();
 
   var date = new Date();
-  var now = Math.round(date.getTime() / 1000); // Sekunnit keskiyöstä 1. Tammikuuta 1970
-   
+  var now = Math.round(date.getTime() / 1000); // Sekunnit keskiyöstä 1. Tammikuuta 1970  
   var saapuvienlkm = Object.keys(myJson.result).length; // Kuinka monen pysäkille saapuvan bussin tiedot JSON-viestissä on (= parseData.result objektien lukumäärä)
-    
+
   if (saapuvienlkm > 5) { // Näytetään kerrallaan maksimissaan viisi seuraavaa bussia vaikka palvelimella olisi tiedot useammasta
     saapuvienlkm = 5;
   }
@@ -120,9 +116,9 @@ async function updateBusDataAsync() {
     aika[j] = aika[j] + ' min';
   }
 
-  // HTML-sivulla olevien elementtien päivittäminen
-  var tags = ["pysäkki", "pysäkkinimi","linja0", "kohde0", "aika0", "linja1", "kohde1", "aika1", "linja2", "kohde2", "aika2",
-              "linja3", "kohde3", "aika3", "linja4", "kohde4", "aika4"],
+  // HTML-sivulla olevien elementtien päivittäminen uusilla arvoilla
+  var tags = ['pysäkki', 'pysäkkinimi', 'linja0', 'kohde0', 'aika0', 'linja1', 'kohde1', 'aika1', 'linja2', 'kohde2', 'aika2',
+              'linja3', 'kohde3', 'aika3', 'linja4', 'kohde4', 'aika4'],
       corr = [pysäkki, pysäkkinimihaettu, linja[0], kohde[0], aika[0], linja[1], kohde[1], aika[1], linja[2], kohde[2], aika[2],
               linja[3], kohde[3], aika[3], linja[4], kohde[4], aika[4]];
 
